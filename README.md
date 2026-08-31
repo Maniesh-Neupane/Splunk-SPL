@@ -1,34 +1,7 @@
 # Splunk-SPL
 # 🛡️ Splunk SPL Threat Hunting & Attack Detection Cheat Sheet
 
-Welcome to the **Splunk SPL Threat Detection & Threat Hunting Cheat Sheet**. This repository provides production-grade, syntactically accurate Search Processing Language (SPL) queries for Security Operations Center (SOC) analysts, threat hunters, and detection engineers.
-
 ---
-
-## 🎯 Purpose
-
-This document provides detection logic, field mappings, attack concepts, and SOC playbooks to help security teams hunt for malicious activity, build automated alert rules, and analyze security telemetry in Splunk.
-
-Every query in this repository includes:
-
-* Detailed explanations of the underlying attack mechanics.
-* Accurate MITRE ATT&CK technique mappings.
-* Field assumptions and data source requirements.
-* Detailed breakdowns of all SPL commands used.
-* Practical SOC tuning, investigation, and response guidance.
-
----
-
-## ⚠️ Before You Start
-
-* **Environment-Specific Fields:** Do not copy queries blindly into production. Field names differ across log sources (e.g., Windows Security Events, Sysmon, Zeek, Palo Alto, AWS CloudTrail). Update field names to match your index schema or Common Information Model (CIM) data models.
-* **Replace Placeholders:** Replace generic placeholders like `index=YOUR_INDEX` and `sourcetype=YOUR_SOURCETYPE` with your environment's specific values.
-* **Validate Log Ingestion:** Verify that the required log sources (e.g., Sysmon Event ID 1, Windows Event ID 4624/4625, CloudTrail) are ingested and indexed before running these searches.
-* **Time Windows:** Always limit your initial search window (e.g., `earliest=-15m latest=now` or `earliest=-24h`) to prevent excessive cluster resource consumption.
-* **Threshold Tuning:** Thresholds (e.g., `where count > 10`) are baseline starting points. Tune thresholds based on your organization's environment to minimize false positives.
-
----
-
 ## 📚 Table of Contents
 
 * [Data-Source Matrix](https://www.google.com/search?q=%23-data-source-matrix)
