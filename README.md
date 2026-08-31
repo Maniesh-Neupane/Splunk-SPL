@@ -21,10 +21,12 @@
 
 ## 🧩 SPL Fundamentals Used in This Cheat Sheet
 
+
 * **Search Terms & Boolean Operators (`AND`, `OR`, `NOT`)**
 * *Purpose:* Narrows down raw events matching specific string patterns.
 * *Syntax:* `index=security ("failed" OR "failure") NOT user="system"`
 * *Security Use Case:* Filtering out system noise to focus on real user authentication events.
+
 
 
 * **`stats`**
@@ -33,10 +35,12 @@
 * *Security Use Case:* Counting failed logins per IP to detect brute-force attacks.
 
 
+
 * **`eventstats`**
 * *Purpose:* Calculates aggregate statistics across the dataset and appends the result as a new field to every individual event without discarding raw rows.
 * *Syntax:* `... | eventstats avg(bytes_out) as avg_bytes by src_ip`
 * *Security Use Case:* Comparing an individual connection's size against that IP's average outbound volume.
+
 
 
 * **`streamstats`**
@@ -45,10 +49,12 @@
 * *Security Use Case:* Measuring exact time gaps between sequential HTTP requests to detect C2 beaconing.
 
 
+
 * **`eval`**
 * *Purpose:* Creates new fields, performs mathematical operations, or transforms string values based on logic (`if`, `case`, `coalesce`).
 * *Syntax:* `... | eval MB = bytes / 1024 / 1024`
 * *Security Use Case:* Converting raw byte values into megabytes or unifying mismatched field names across log sources.
+
 
 
 * **`where`**
@@ -57,10 +63,12 @@
 * *Security Use Case:* Dropping aggregate statistics rows that do not breach designated risk thresholds.
 
 
+
 * **`table` & `fields**`
 * *Purpose:* `table` formats output into dedicated visible columns; `fields` keeps or removes specific fields in memory to speed up search performance.
 * *Syntax:* `... | table _time, user, src_ip, action`
 * *Security Use Case:* Building readable, structured summary reports for SOC operational tickets.
+
 
 
 * **`rename`**
@@ -69,10 +77,12 @@
 * *Security Use Case:* Standardizing vendor-specific fields across multi-cloud and Windows logs.
 
 
+
 * **`sort`**
 * *Purpose:* Orders search results by specified numerical or string fields (ascending by default, descending with `-`).
 * *Syntax:* `... | sort - total_bytes`
 * *Security Use Case:* Displaying top compromised accounts or highest data exfiltration targets first.
+
 
 
 * **`dedup`**
@@ -81,10 +91,12 @@
 * *Security Use Case:* Consolidating repeated alerts into a list of unique indicators of compromise (IOCs).
 
 
+
 * **`rex`**
 * *Purpose:* Extracts custom fields from unformatted raw log text (`_raw`) using Regular Expressions (Regex).
 * *Syntax:* `... | rex field=_raw "from (?<src_ip>\d+\.\d+\.\d+\.\d+)"`
 * *Security Use Case:* Pulling out injected SQL commands or domain names from unparsed application logs.
+
 
 
 * **`bin` / `bucket**`
@@ -93,16 +105,19 @@
 * *Security Use Case:* Dividing network traffic into 15-minute buckets for time-series trend analysis.
 
 
+
 * **`timechart`**
 * *Purpose:* Creates statistical aggregation tables pre-formatted for time-series charts and line graphs.
 * *Syntax:* `... | timechart span=1h count by sourcetype`
 * *Security Use Case:* Visualizing sudden spikes in network connection attempts over 24 hours.
 
 
+
 * **`transaction`**
 * *Purpose:* Collapses related events into a single multi-event transaction based on matching fields and time limits.
 * *Syntax:* `... | transaction user maxspan=30m maxpause=5m`
 * *Security Use Case:* Stitching together an entire user session from initial login to command execution and logout.
+
 
 
 * **`lookup`**
@@ -172,7 +187,7 @@
 
 ---
 
-## 🔍 Master Investigation Playbook Workflow
+## 🔍  Investigation Playbook Workflow
 
 ```text
   [ Alert Triggered ]
@@ -1478,15 +1493,7 @@ Filter out automated SSO federated identities (e.g., SAML, AWS IAM Identity Cent
 
 ---
 
-## 📖 How to Learn These Detections
 
-1. **Set Up a Free Splunk Lab:** Install Splunk Enterprise locally using a free trial or Developer License.
-2. **Ingest Practice Datasets:** Download public attack datasets such as **Splunk Boss of the SOC (BOTS)** or **Atomic Red Team** logs.
-3. **Execute Attacks in a Lab Sandbox:** Use tools like `Invoke-AtomicRedTeam` to simulate attacks, then locate the generated log telemetry in Splunk.
-4. **Practice Field Normalization:** Use `eval` and `coalesce` to merge field names from varying sourcetypes into CIM-compliant standard schemas.
-5. **Optimize Query Speed:** Re-write queries using `tstats` and `fields` filtering to ensure alerts run efficiently over large dataset volumes.
-
----
 
 ## ⚡ Quick Revision Table
 
