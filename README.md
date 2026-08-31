@@ -1,5 +1,4 @@
-# Splunk-SPL
-# 🛡️ Splunk SPL Threat Hunting & Attack Detection Cheat Sheet
+#  Splunk SPL Threat Hunting & Attack Detection Cheat Sheet
 
 ---
 ## 📚 Table of Contents
