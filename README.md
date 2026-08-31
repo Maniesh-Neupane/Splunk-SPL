@@ -2437,16 +2437,3 @@ index=* sourcetype="aws:cloudtrail" eventName=StopLogging
 
 ```
 
----
-
-## 📘 SECTION 4: INVESTIGATION CHECKLIST FOR SOC ANALYSTS
-
-1. **Verify Alert Validity:** Rule out vulnerability scanners, scheduled scripts, and authorized IT activities.
-2. **Determine Scope:** Identify the primary source host, destination host, and account credentials involved.
-3. **Construct Timeline:** Query logs 30 minutes before and after the event to contextualize activity.
-4. **Pivot Telemetry Sources:** Correlate endpoint process execution with network traffic and firewall logs.
-5. **Enforce Containment:** Isolate affected hosts, block malicious external IPs, and revoke active user tokens.
-
-```
-
-```
